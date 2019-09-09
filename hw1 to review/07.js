@@ -17,11 +17,7 @@ function deepestObjCopyEver(obj) {
 	return copyObj;
 }
 
-let date = new Date(); // the Date objects has a prop with Symbol type. But, Symbolic properties do not participate in for..in loop.
-let regs = new RegExp();
-// date instanceof Date
-// console.log(date instanceof Date)
-const wow = {
+const firstObj = {
 	'a': {
 		0: 0,
 		1: 1,
@@ -30,14 +26,14 @@ const wow = {
 				return 0;
 			}
 		},
-		3: date,
-		4: regs
+		3: new Date(),
+		4: new RegExp()
 	}
 }
 
-// console.log(deepestObjCopyEver(wow));
-let newObj = deepestObjCopyEver(wow);
+// console.log(deepestObjCopyEver(firstObj));
+let newObj = deepestObjCopyEver(firstObj);
 // let's check out if it's really copied
-// wow.a[0] = 10; // difference
-// console.log('wow: ', wow);
+firstObj.a[0] = 10; // difference
+console.log('firstObj: ', firstObj);
 console.log('newObj: ', newObj)
