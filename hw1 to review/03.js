@@ -7,7 +7,8 @@ const dog = {
   }
 };
 
-const sayName = dog.sayName.bind(dog); // Can we do it better?
+const sayName = () => dog.sayName();
   
 sayName();
+// or just dog.sayName();
   

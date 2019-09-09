@@ -1,7 +1,7 @@
 // create function which will make deep copy of object
 
 function deepestObjCopyEver(obj) {
-	isObj = obj => obj && typeof obj === 'object' ? true : false;
+	const isObj = obj => obj && typeof obj === 'object';
 	if(!isObj(obj)) return obj;
 	let copyObj = {};
 	for(let prop in obj) {
@@ -9,6 +9,9 @@ function deepestObjCopyEver(obj) {
 	}
 	return copyObj;
 }
+
+let date = new Date(); // the Date objects has a prop with Symbol type. But, Symbolic properties do not participate in for..in loop.
+// date instanceof Date
 
 const wow = {
 	'a': {
@@ -18,7 +21,8 @@ const wow = {
 			'qwerty': function() {
 				return 0;
 			}
-		}
+		},
+		3: date
 	}
 }
 

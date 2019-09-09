@@ -14,11 +14,7 @@ const heroes = [
 ];
 
 // realization
-const newHeroes = heroes.map(h => {
-  let tempObj = Object.assign({}, h)
-  tempObj.name = h.name.toUpperCase()
-  return tempObj
-});
+const newHeroes = heroes.map(h => ({...h, name: h.name.toUpperCase()}));
 
 console.log(heroes);
 console.log(newHeroes);

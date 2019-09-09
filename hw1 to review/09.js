@@ -32,6 +32,11 @@
 // other elements positions in finalArr2 (with title6, title7, title8) are not important
 
 const colors = ['color1', 'color2', 'color3', 'color4', 'color5', 'color6', 'color7', 'color8', 'color9', 'color10'];
+const colors16 = [
+	'1111100000000000', '0000011111100000', '0000000000011111', 
+	'0000000000000000', '1111111111111111', '1111111111100000', 
+	'1111100000011111', '0000011111111111', '0000011111111000'
+];
 
 const arr1 = [
   { title: 'title1', value: 'value1' },
@@ -49,16 +54,12 @@ const arr2 = [
   { title: 'title8', value: 'value8' }
 ];
 
-combineTitlesToColors = (titles, colors) => {
-	let finalArr = titles.map(el => {
-		delete el.value;
-		let colorIndex = colors.indexOf(`color${el.title.slice(-1)}`);
-		el.color = colors[colorIndex];
-		return el;
-	}); return finalArr;
+// it can be in one line, but it would be too long line
+const titles2Colors = (titles, colors) => {
+	return titles.map(el => ({title: el.title, color: colors[el.title.slice(-1)-1]}));
 }
 
-createFinalArr2 = (arr1, arr2) => {
+const createFinalArr2 = (arr1, arr2) => {
 	// intersection search
 	let intersectionEls = [];
 	arr2.forEach(el2 => {
@@ -80,8 +81,13 @@ createFinalArr2 = (arr1, arr2) => {
 				arr2.splice(elem.index, 0, elem.obj);	// insertion to new position
 			}
 		}); index--;
-	} return arr2;
+	}
+	return arr2;
 }
 
-console.log(combineTitlesToColors(arr1, colors)); // returns finalArr1
-console.log(createFinalArr2(arr1, combineTitlesToColors(arr2, colors))); // returns finalArr2
+console.group()
+console.log(titles2Colors(arr1, colors)); // returns finalArr1
+console.log(createFinalArr2(arr1, titles2Colors(arr2, colors))); // returns finalArr2
+console.groupEnd()
+console.log(titles2Colors(arr1, colors16)); // returns finalArr1
+console.log(createFinalArr2(arr1, titles2Colors(arr2, colors16))); // returns finalArr2

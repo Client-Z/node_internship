@@ -4,7 +4,12 @@ for (var i = 0; i < 4; i++) {
   setTimeout(() => console.log(i), 0)
 }
 
-// I am not sure I fully understand why 'let' works here instead of 'var'.
 for (let i = 0; i < 4; i++) {
   setTimeout(() => console.log(i), 0)
 }
+
+// or
+
+// for (var i = 0; i < 4; i++) {
+//   setTimeout(() => console.log(i), 0)
+// }
