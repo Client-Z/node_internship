@@ -23,49 +23,40 @@ const dataBase = {
 		if(result.length && result[0].password === password) {
 			callback(null, {username, password});
 		} else {
-			callback(true, {username, password});
+			callback(`User ${username} wasn't verified`, {username, password});
 		}
 	},
 
 	getRoles: (username, callback) => {
-		// TODO get roles array
-		// find all roles of the current user
+		// TODO get roles array (find all roles of the current user)
 		let rolesOfUser = rolesList.filter(obj => obj.username === username).map(el => el.role);
-		if(rolesOfUser.length) {
-			callback(null, rolesOfUser);
-		} else {
-			callback(true);
-		}
+		rolesOfUser.length ? callback(null, rolesOfUser) : callback(`User ${username} has no roles`);
 	},
 
 	logAccess: (username, callback) => {
 		// TODO access if admin
 		let rolesOfUser = rolesList.filter(obj => obj.username === username);
 		let isAdmin = rolesOfUser.length > 0 ? rolesOfUser.map(el => el.role === 'admin')[0] : false;
-		if(isAdmin) {
-			callback(null, 'Logging was allowed');
-		} else {
-			callback(true);
-		}
+		isAdmin ? callback(null) : callback(`User ${username} hasn't 'admin' role`);
 	},
 };
 
 const verifyUser = function(username, password, callback) {
 	dataBase.verifyUser(username, password, (error, userInfo) => {
 		if (error) {
-			callback(`User ${username} wasn't verified`);
+			callback(error);
 		} else {
-			callback(`User ${username} was verified`);
+			callback(null, `User ${username} was verified`);
 			dataBase.getRoles(username, (error, roles) => {				
 				if (error) {
-					callback(`User ${username} has no roles`);
+					callback(error);
 				} else {
-					callback(`User ${username} has roles: ${roles}`);
+					callback(null, `User ${username} has roles: ${roles}`);
 					dataBase.logAccess(username, (error) => {
 						if (error) {
-							callback(`User ${username} hasn't 'admin' role`);
+							callback(error);
 						} else {
-							callback(`User ${username} was successfully loged`)
+							callback(null, userInfo, roles)
 						}
 					})
 				}
@@ -73,8 +64,11 @@ const verifyUser = function(username, password, callback) {
 		}
 	})
 };
-verifyUser('Sam', '222', function(data) {
-	console.log(data);
+verifyUser('Bob', '111', function(error, userInfo, roles) {
+	if(error) console.log(error);
+	if(userInfo) console.log('Info: ', userInfo);
+	if(roles) console.log('With these roles: ', roles);
 });
 // TODO rewrite with promises
+
 // TODO rewrite with async/await
