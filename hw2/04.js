@@ -101,7 +101,7 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 //   	logAccess: ({userInfo, rolesOfUser}) => {
 // 		// TODO access if admin
 // 		return new Promise((resolve, reject) => {
-// 			let isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
+// 			const isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
 // 			isAdmin ? resolve({userInfo, rolesOfUser}) : reject(`User ${userInfo.username} hasn't 'admin' role`);
 // 		});
 //   	},
@@ -123,7 +123,7 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 // const dataBaseAsync = {
 //   	verifyUser: async (username, password) => {
 // 		// TODO check username and password
-// 		let result = usersList.filter(obj => obj.username === username);
+// 		const result = usersList.filter(obj => obj.username === username);
 // 		if(result.length && result[0].password === password) {
 // 			return { username, password };
 // 		} else {
@@ -138,7 +138,7 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 // 	},
 // 	logAccess: async ({username, rolesOfUser}) => {
 // 		// TODO access if admin
-// 		let isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
+// 		const isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
 // 		return isAdmin ? true : new Error(`User ${username} hasn't 'admin' role`);
 // 	},
 // };
