@@ -69,6 +69,9 @@
 // }
 
 // !!! This is the second and more memory friendly version :)
+// Also we can save only ranges in the set like [1, 5], [10, 20], 
+// but It needs more complicated code and I am not sure if it worth
+
 class RangeList {
 
 	constructor(range) {

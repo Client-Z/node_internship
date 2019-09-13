@@ -80,7 +80,6 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 // TODO rewrite with promises
 // const dataBasePromise = {
 // 	verifyUser: (username, password) => {
-// 		// TODO check username and password
 // 		console.log('\nPromise version:');
 // 		return new Promise((resolve, reject) => {
 // 			let result = usersList.filter(obj => obj.username === username);
@@ -92,14 +91,12 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 // 		});
 //   	},
 //   	getRoles: (userInfo) => {
-// 	  	// TODO get roles array (find all roles of the current user)
 // 		return new Promise((resolve, reject) => {
 // 			let rolesOfUser = rolesList.filter(obj => obj.username === userInfo.username).map(el => el.role);
 // 			rolesOfUser.length ? resolve({userInfo, rolesOfUser}) : reject(`User ${userInfo.username} has no roles`);
 // 		});
 //   	},
 //   	logAccess: ({userInfo, rolesOfUser}) => {
-// 		// TODO access if admin
 // 		return new Promise((resolve, reject) => {
 // 			const isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
 // 			isAdmin ? resolve({userInfo, rolesOfUser}) : reject(`User ${userInfo.username} hasn't 'admin' role`);
@@ -122,7 +119,6 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 // TODO rewrite with async/await
 // const dataBaseAsync = {
 //   	verifyUser: async (username, password) => {
-// 		// TODO check username and password
 // 		const result = usersList.filter(obj => obj.username === username);
 // 		if(result.length && result[0].password === password) {
 // 			return { username, password };
@@ -131,13 +127,11 @@ verifyUser('Bob', '111', function(error, userInfo, roles) {
 // 		}
 // 	},
 // 	getRoles: async ({username, password}) => {
-// 		// TODO get roles array (find all roles of the current user)
 // 		let rolesOfUser = rolesList.filter(obj => obj.username === username).map(el => el.role);
 // 		const result = { username, password, rolesOfUser };
 // 		return rolesOfUser.length ? result : new Error(`User ${username} has no roles`);
 // 	},
 // 	logAccess: async ({username, rolesOfUser}) => {
-// 		// TODO access if admin
 // 		const isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
 // 		return isAdmin ? true : new Error(`User ${username} hasn't 'admin' role`);
 // 	},
