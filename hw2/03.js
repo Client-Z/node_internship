@@ -75,17 +75,34 @@ class RangeList {
 
 	constructor(range) {
 		this.rangeList = new Set();
+		this.add(range)
+	}
+
+	validate(range) {
+		if(Array.isArray(range) && range.length === 2) {
+			if(typeof range[0] === 'number' && typeof range[1] === 'number') 
+				return true;
+		}
+		return false;
 	}
 	  
 	add(range) {
-		for(let i = range[0]; i < range[1]; i++) this.rangeList.add(i);
-		let tempArr = Array.from(this.rangeList);
-		tempArr.sort((a, b) => a - b);
-		this.rangeList = new Set(tempArr);
+		if(this.validate(range)) {
+			for(let i = range[0]; i < range[1]; i++) this.rangeList.add(i);
+			let tempArr = Array.from(this.rangeList);
+			tempArr.sort((a, b) => a - b);
+			this.rangeList = new Set(tempArr);
+		} else {
+			console.error('Wrong type of the data.')
+		}
 	}
 
 	remove(range) {
-		for(let i = range[0]; i < range[1]; i++) this.rangeList.delete(i);
+		if(this.validate(range)) {
+			for(let i = range[0]; i < range[1]; i++) this.rangeList.delete(i);
+		} else {
+			console.error('Wrong type of the data.')
+		}
 	}
 
 	print() {
@@ -105,7 +122,8 @@ class RangeList {
 }
 
 // Example run
-const rl = new RangeList();
+const rl = new RangeList([1, 3]);
+rl.print();
 
 rl.add([1, 5]);
 rl.print();
@@ -146,3 +164,5 @@ rl.print();
 rl.remove([3, 19]);
 rl.print();
 // Should display: [1, 3) [19, 21)
+rl.remove([3]);
+// Wrong type of the data.
