@@ -2,11 +2,11 @@ const {usersList, rolesList} = require("./04-data");
 
 const dataBase = {
 	verifyUser: (username, password, callback) => {
-	  let result = usersList.filter(obj => obj.username === username);
-	  if(result.length && result[0].password === password) {
-		  callback(null, {username, password});
+	  let result = usersList.find(obj => obj.username === username);
+	  if(result.password === password) {
+		  callback(null, username);
 	  } else {
-		  callback(`User ${username} wasn't verified`, {username, password});
+		  callback(`User ${username} wasn't verified`, username);
 	  }
   },
 
@@ -16,8 +16,7 @@ const dataBase = {
   },
 
   logAccess: (username, rolesOfUser, callback) => {
-	  let isAdmin = rolesOfUser.length > 0 ? rolesOfUser.filter(el => el === 'admin')[0] : false;
-	  isAdmin ? callback(null) : callback(`User ${username} hasn't 'admin' role`);
+	  rolesOfUser.includes('admin') ? callback(null) : callback(`User ${username} hasn't 'admin' role`);
   },
 };
 
@@ -26,12 +25,10 @@ const verifyUser = function(username, password, callback) {
 	  if (error) {
 		  callback(error);
 	  } else {
-		  callback(null, `User ${username} was verified`);
 		  dataBase.getRoles(username, (error, roles) => {				
 			  if (error) {
 				  callback(error);
 			  } else {
-				  callback(null, `User ${username} has roles: ${roles}`);
 				  dataBase.logAccess(username, roles, (error) => {
 					  if (error) {
 						  callback(error);
