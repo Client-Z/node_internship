@@ -25,16 +25,19 @@ const dataBasePromise = {
   	},
 };
 
-const verifyUserPromise = (username, password) => 
-	dataBasePromise.verifyUser(username, password)
+const verifyUserPromise = (username, password) => {
+	return new Promise((resolve, reject) => {
+		dataBasePromise.verifyUser(username, password)
 		.then(dataBasePromise.getRoles)
 		.then(dataBasePromise.logAccess)
 		.then(({userInfo, rolesOfUser}) => {
 			const { username, password } = {...userInfo};
 			console.log(`Username: ${username}; Password: ${password}; \n${username} has role(s): [${rolesOfUser}]`);
+			resolve(userInfo);
 		})
 		.catch((error) => console.log(`error: ${error}`));
-
+	});
+}
 
 verifyUserPromise('Sam', '222');
 verifyUserPromise('Bob', '111');
