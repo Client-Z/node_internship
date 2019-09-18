@@ -42,15 +42,28 @@ function MySet() {
 		return newCollection;
 	};
 
-  // this method will test if the set is a subset of a different set
+	// this method will test if the set is a subset of a different set
+	// in general it has O(n) complexity
+	// also I could add object comparing based on homework 1, but I think it would be overkill for this one
+	// or maybe just JSON.stringify(obj1) === JSON.stringify(obj2) 
 	this.subset = (otherSet) => {
 		const lengthOfOtherSet = otherSet.size();
-		let inComparing = false;
-		let wasCompared = false;
-		if(this.size() < lengthOfOtherSet) {
-			for(let i = 0; i < lengthOfOtherSet; i++) {
-				// logic
+		const lengthOfCurrentSet = this.size();
+		let comparisonIdx = null;
+		// current set can be subset of another set only if it is shorter
+		if(lengthOfCurrentSet < lengthOfOtherSet) {
+			const otherSetValues = otherSet.values();
+			for(let i = 0; i <= lengthOfOtherSet; i++) {
+				// if the comparing is not proceed
+				if(comparisonIdx === null) {
+					if(collection[0] === otherSetValues[i]) comparisonIdx = 0;
+				} else {
+					// if comparing is proceed
+					if(comparisonIdx === (lengthOfCurrentSet - 1)) return true; // if the current set ends
+					collection[comparisonIdx + 1] === otherSetValues[i] ? comparisonIdx++ : comparisonIdx = null;
+				}
 			}
+			return false;
 		} else {
 			return false;
 		}
@@ -60,17 +73,19 @@ function MySet() {
 const setA = new MySet();
 const setB = new MySet();
 setA.add("a");
-console.log(setA.has("a"));
+setA.add("d");
+console.log(`setA has 'a' - ${setA.has("a")}`);
 setB.add("b");
 setB.add("c");
 setB.add("a");
 setB.add("d");
+console.log(`setB - ${setB.values()}`);
+console.log(`setB size = ${setB.size()}`);
+setB.remove('c');
+console.log(`setB - ${setB.values()}`);
+console.log(`setB after union method: ${setB.union([1,2,3])}`);
+console.log(`setA is a subset of setB: ${setA.subset(setB)}`); // true
+console.log(setA.intersection(setB).values()); // [ 'a', 'd' ]
+console.log(setB.difference(setA).values()); // [ 'b', 'c', 'd', 1, 2, 3 ]
+console.log(setA.values());
 console.log(setB.values());
-console.log(setB.size());
-// setB.remove('a');
-console.log(setB.values());
-console.log(setB.union([1,2,3]));
-console.log(setB.values());
-console.log(setA.subset(setB)); // true
-console.log(setA.intersection(setB).values()); // [ 'a' ]
-console.log(setB.difference(setA).values()); // [ 'b', 'c', 'd' ]
