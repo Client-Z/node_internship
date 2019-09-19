@@ -4,11 +4,13 @@ function Queue () {
   // collection will hold the queue
   const collection = [];
 
+  this.isValid = (val) => val === undefined || Number.isNaN(val) || val === null ? false : true;
+  
   // this method prints queue elements
   this.print = () => console.log(collection);
 
   // this method will push element to queue
-  this.enqueue = (el) => collection.push(el);
+  this.enqueue = (el) => this.isValid(el) ? collection.push(el) : console.error(`You can't add any indefinite value!`);
 
   // this method will remove element from queue
   this.dequeue = () => collection.shift();

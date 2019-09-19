@@ -23,10 +23,15 @@ function MySet() {
 	};
 
   // this method will return the size of the collection
-  this.size = ()  => collection.length;
+  this.size = () => collection.length;
 
   // this method will return the union of two sets
-  this.union = (otherSet) => collection = [...collection, ...otherSet];
+  this.union = (otherSet) => {
+		let newCollection = new MySet();
+		collection.forEach(el => newCollection.add(el));
+		otherSet.values().forEach(el => newCollection.has(el) ? false : newCollection.add(el));
+		return newCollection.values();
+  };
 
   // this method will return the intersection of two sets as a new set
   this.intersection = (otherSet) => {
@@ -74,18 +79,20 @@ const setA = new MySet();
 const setB = new MySet();
 setA.add("a");
 setA.add("d");
-console.log(`setA has 'a' - ${setA.has("a")}`);
+console.log(`setA has 'a' - ${setA.has("a")}`); // setA has 'a' - true
+
 setB.add("b");
 setB.add("c");
 setB.add("a");
 setB.add("d");
-console.log(`setB - ${setB.values()}`);
-console.log(`setB size = ${setB.size()}`);
+console.log(`setB - ${setB.values()}`); // setB - b,c,a,d
+console.log(`setB size = ${setB.size()}`); // setB size = 4
 setB.remove('c');
-console.log(`setB - ${setB.values()}`);
-console.log(`setB after union method: ${setB.union([1,2,3])}`);
+console.log(`setB - ${setB.values()}`); // setB - b,a,d
+console.log('A: '+setA.values()); // setA - a,d
+console.log(`new set: ${setB.union(setA)}`); // new set: b,a,d
 console.log(`setA is a subset of setB: ${setA.subset(setB)}`); // true
-console.log(setA.intersection(setB).values()); // [ 'a', 'd' ]
-console.log(setB.difference(setA).values()); // [ 'b', 'c', 'd', 1, 2, 3 ]
-console.log(setA.values());
-console.log(setB.values());
+console.log(`Intersection: ${setA.intersection(setB).values()}`); // [ 'a', 'd' ]
+console.log(`Difference: ${setB.difference(setA).values()}`); // [ 'b']
+console.log('A: ', setA.values());
+console.log('B: ', setB.values());
