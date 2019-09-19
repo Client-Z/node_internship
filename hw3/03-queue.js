@@ -5,24 +5,22 @@ function Queue () {
   const collection = [];
 
   // this method prints queue elements
-  this.print = function() {
-    console.log(collection);
-  };
+  this.print = () => console.log(collection);
 
   // this method will push element to queue
-  this.enqueue = function(element) {};
+  this.enqueue = (el) => collection.push(el);
 
   // this method will remove element from queue
-  this.dequeue = function() {};
+  this.dequeue = () => collection.shift();
 
   // this method will return the first element in queue
-  this.front = function() {};
+  this.front = () => collection[0];
 
   // this method will return the size of the queue
-  this.size = function() {};
+  this.size = () => collection.length;
 
   // this method will return true value if queue has no elements
-  this.isEmpty = function() {};
+  this.isEmpty = () => !collection.length;
 }
 
 const q = new Queue();
@@ -36,3 +34,5 @@ q.dequeue();
 console.log(q.front()); // b
 
 q.print(); // [ 'b', 'c' ]
+console.log(q.size());
+console.log(q.isEmpty());
