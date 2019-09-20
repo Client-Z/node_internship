@@ -12,12 +12,12 @@ function MySet() {
 
 	this.isValid = (val) => val === undefined || Number.isNaN(val) || val === null ? false : true;
   // this method will add an element to the set
-  this.add = (el) => {
+	this.add = (el) => {
 		!this.has(el) && this.isValid(el) ? collection.push(el) : console.error(`The set already has ${el} element!`);
 	};	
 
   // this method will remove an element from a set
-  this.remove = (el) => {
+	this.remove = (el) => {
 		const index = collection.indexOf(el);
 		this.has(el) ? collection.splice(index, 1) : console.error(`The ${el} element was not found in the set!`);
 	};
@@ -26,22 +26,22 @@ function MySet() {
   this.size = () => collection.length;
 
   // this method will return the union of two sets
-  this.union = (otherSet) => {
+	this.union = (otherSet) => {
 		let newCollection = new MySet();
 		collection.forEach(el => newCollection.add(el));
 		otherSet.values().forEach(el => newCollection.has(el) ? false : newCollection.add(el));
 		return newCollection.values();
-  };
+	};
 
   // this method will return the intersection of two sets as a new set
-  this.intersection = (otherSet) => {
+	this.intersection = (otherSet) => {
 		let newCollection = new MySet();
 		collection.forEach(el => otherSet.has(el) ? newCollection.add(el) : false);
 		return newCollection;
 	};
 
   // this method will return the difference of two sets as a new set
-  this.difference = (otherSet) => {
+	this.difference = (otherSet) => {
 		let newCollection = new MySet();
 		collection.forEach(el => !otherSet.has(el) ? newCollection.add(el) : false);
 		otherSet.forEach(el => !collection.has(el) ? newCollection.add(el) : false);

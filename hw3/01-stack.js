@@ -1,12 +1,12 @@
 /* Stacks */
 
 function Stack() {
-  this.storage = {};
+	this.storage = {};
 	this.count = 0;
 
 	this.isValid = (val) => val === undefined || Number.isNaN(val) || val === null ? false : true;
-  // Adds a value onto the end of the stack
-  this.push = (value) => {
+	// Adds a value onto the end of the stack
+	this.push = (value) => {
 		if(this.isValid(value)) {
 			this.storage[this.count] = value;
 			this.count++;
@@ -26,8 +26,8 @@ function Stack() {
 		}
 	}
 	// Returns the size of the stack
-  this.size = () => this.count;
-  // Returns the value at the end of the stack
+	this.size = () => this.count;
+	// Returns the value at the end of the stack
 	this.peek = () => this.storage[this.count - 1];
 }
 
