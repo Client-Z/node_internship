@@ -44,6 +44,7 @@ function MySet() {
   this.difference = (otherSet) => {
 		let newCollection = new MySet();
 		collection.forEach(el => !otherSet.has(el) ? newCollection.add(el) : false);
+		otherSet.forEach(el => !collection.has(el) ? newCollection.add(el) : false);
 		return newCollection;
 	};
 
