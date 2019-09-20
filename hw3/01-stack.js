@@ -14,7 +14,7 @@ function Stack() {
 			console.error(`You can't add any indefinite value! It must be some object or primitive.`);
 		}
 	};
-  // Removes and returns the value at the end of the stack
+	// Removes and returns the value at the end of the stack
 	this.pop = () => {
 		if(this.count) {
 			this.count--;
