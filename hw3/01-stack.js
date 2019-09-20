@@ -45,7 +45,6 @@ console.log(myStack.pop()); // some date
 console.log(myStack.peek()); // func
 
 myStack.push("node.js");
-
 console.log(myStack.size()); // 4
 console.log(myStack.peek()); // node.js
 console.log(myStack.pop()); // node.js
