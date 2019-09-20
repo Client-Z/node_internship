@@ -44,7 +44,7 @@ function MySet() {
 	this.difference = (otherSet) => {
 		let newCollection = new MySet();
 		collection.forEach(el => !otherSet.has(el) ? newCollection.add(el) : false);
-		otherSet.forEach(el => !collection.has(el) ? newCollection.add(el) : false);
+		otherSet.values().forEach(el => !this.has(el) ? newCollection.add(el) : false);
 		return newCollection;
 	};
 
@@ -94,6 +94,8 @@ console.log('A: '+setA.values()); // setA - a,d
 console.log(`new set: ${setB.union(setA)}`); // new set: b,a,d
 console.log(`setA is a subset of setB: ${setA.subset(setB)}`); // true
 console.log(`Intersection: ${setA.intersection(setB).values()}`); // [ 'a', 'd' ]
+setB.add("s");
+setA.add("w");
 console.log(`Difference: ${setB.difference(setA).values()}`); // [ 'b']
 console.log('A: ', setA.values());
 console.log('B: ', setB.values());
