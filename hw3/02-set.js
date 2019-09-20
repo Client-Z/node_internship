@@ -48,8 +48,8 @@ function MySet() {
 		return newCollection;
 	};
 
-	// this method will test if the set is a subset of a different set
-	// in general it has O(n) complexity
+	// this method will test if the set is a subset of a different set, order is important, otherwise it's too simple.
+	// The 'subset' in general has O(n) complexity
 	// also I could add object comparing based on homework 1, but I think it would be overkill for this one
 	// or maybe just JSON.stringify(obj1) === JSON.stringify(obj2) 
 	this.subset = (otherSet) => {
