@@ -30,7 +30,7 @@ function MySet() {
 		let newCollection = new MySet();
 		collection.forEach(el => newCollection.add(el));
 		otherSet.values().forEach(el => newCollection.has(el) ? false : newCollection.add(el));
-		return newCollection.values();
+		return newCollection;
 	};
 
 	// this method will return the intersection of two sets as a new set
